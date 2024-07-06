@@ -21,7 +21,7 @@ class LlmJob < ApplicationJob
            end
 
 
-    Message.create(text: , room_id: message.room_id, user: User.find_or_create_by(name: "admin"), references: build_references(chunks))
+    Message.create(text: , room_id: message.room_id, user: User.find_or_create_by(name: "admin"), references: build_references(chunks), context: "#{system_prompt} \n\n\n\n #{user_prompt}"  )
   end
   def build_context(chunks)
 
@@ -30,7 +30,7 @@ class LlmJob < ApplicationJob
       <<-TEXT.strip_heredoc
 Заголовок: #{article&.name}
 Ссылка: #{article&.link}
-Текст: #{article&.search_index}
+Текст: #{chunk.search_index}
       TEXT
     end.join("------------------------------\n")
   end
