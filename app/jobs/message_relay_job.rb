@@ -1,5 +1,5 @@
 class MessageRelayJob < ApplicationJob
-  queue_with_priority 0
+  queue_with_priority 5
   queue_as :default
 
   def perform(message)

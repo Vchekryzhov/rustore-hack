@@ -1,6 +1,6 @@
 class ExtractEmbedingJob < ApplicationJob
 
-  queue_with_priority 5
+  queue_with_priority 2
   retry_on Errno::ECONNREFUSED, wait: 5, attempts: Float::INFINITY
   def perform(obj)
     return if obj.content_for_similarity.blank?
