@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_05_194704) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_06_131730) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -64,6 +64,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_194704) do
     t.string "search_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "summary"
     t.index ["version_group_id"], name: "index_articles_on_version_group_id"
   end
 
@@ -155,6 +156,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_194704) do
     t.string "search_index"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "summary"
     t.index ["article_id"], name: "index_images_on_article_id"
   end
 
@@ -164,7 +166,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_05_194704) do
     t.text "text"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "context"
+    t.text "context"
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
