@@ -40,7 +40,7 @@ class LlmJob < ApplicationJob
       <<-TEXT.strip_heredoc
         1. [#{article.name}](#{article.link})
       TEXT
-    end.join("\n\n")
+    end
   end
   def build_fallback_response(chunks)
     chunks[0..5].map do |chunk|
