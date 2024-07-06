@@ -11,7 +11,7 @@ class Llm
     if response.success?
       response.parsed_response
     else
-      { error: "Failed to encode text: #{response.message}" }
+      { error: "Failed LLM: #{response.message}" }
     end
   end
 

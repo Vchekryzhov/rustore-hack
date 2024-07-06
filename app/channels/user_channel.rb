@@ -4,7 +4,6 @@ class UserChannel < ApplicationCable::Channel
     if current_user.admin?
       stream_from "room_and_messages_admin"
     else
-
       stream_from "room_and_messages#{current_user.id}"
     end
   end
