@@ -54,6 +54,8 @@ class SemanticSearch
     SELECT 
         ranked_combined_search.id,
         articles.name as name,
+        articles.summary as summary,
+        articles.link as link,
         CONCAT( articles.search_index,' ' , images.search_index ) as search_index,
         articles.link as link,
         score,

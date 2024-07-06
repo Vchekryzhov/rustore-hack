@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_06_131730) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_06_140234) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -66,6 +66,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_131730) do
     t.datetime "updated_at", null: false
     t.text "summary"
     t.index ["version_group_id"], name: "index_articles_on_version_group_id"
+  end
+
+  create_table "configs", force: :cascade do |t|
+    t.text "system", default: ""
+    t.text "user", default: ""
+    t.string "llm_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.boolean "llm_enabled", default: false
   end
 
   create_table "good_job_batches", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
@@ -169,14 +178,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_131730) do
     t.text "context"
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
-  end
-
-  create_table "prompts", force: :cascade do |t|
-    t.text "system", default: ""
-    t.text "user", default: ""
-    t.string "llm_url"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "rooms", force: :cascade do |t|

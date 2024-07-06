@@ -7,7 +7,7 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index do
-      only %w[AnswerQuestion Message Room User Article Image VersionGroup Prompt]
+      only %w[AnswerQuestion Message Room User Article Image VersionGroup Config]
     end
     new
     export
@@ -57,6 +57,18 @@ RailsAdmin.config do |config|
         field :image
       end
     end
-
+    config.model 'Message' do
+      edit do
+        field :user
+        field :room
+        field :text
+        field :context
+      end
+      list do
+          field :user
+          field :room
+          field :text
+      end
+    end
   end
 end

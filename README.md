@@ -16,3 +16,5 @@ docker-compose down && docker-compose up
 3. Далее на основе вопроса пользователя мы выполняем [гибридный поиск](app/models/semantic_search.rb) и таким образом определяем класс вопроса пользователя
 
 ## чатбот
+
+[123](https://kek.com)
