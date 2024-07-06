@@ -26,9 +26,9 @@ class LlmJob < ApplicationJob
     end.join("------------------------------\n")
   end
   def build_fallback_response(articles)
-    articles[0..1].map do |article|
+    articles[0..5].map do |article|
       <<-TEXT.strip_heredoc
-        [#{article.summary}](#{article.link})
+        1. [#{article.summary}](#{article.link})
       TEXT
     end.join("\n\n")
   end
