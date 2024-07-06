@@ -37,9 +37,10 @@ class LlmJob < ApplicationJob
 
   def build_references(chunks)
     Article.where(id: chunks.map(&:article_id).uniq[0..5]).map do |article|
-      <<-TEXT.strip_heredoc
-        [#{article.name}](#{article.link})
-      TEXT
+      {
+        name: article.name,
+        url: article.link
+      }.to_json
     end
   end
   def build_fallback_response(chunks)
