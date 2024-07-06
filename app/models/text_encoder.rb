@@ -2,6 +2,7 @@ require 'httparty'
 
 class TextEncoder
   include HTTParty
+  default_timeout 10.minutes.in_seconds
   base_uri ENV.fetch('ENCODER_URL')
 
   def self.call(text)
