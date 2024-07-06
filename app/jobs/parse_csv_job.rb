@@ -1,13 +1,13 @@
 class ParseCsvJob < ApplicationJob
   def perform(*)
     csv = CSV.read('public/articles.csv')
-    # headers = csv.shift
-    # csv.each do |line|
-    #   link = line[headers.index('Page')]
-    #   content = line[headers.index('Content')]
-    #   title = line[headers.index('Title')]
-    #   Article.create(link:, content: content.delete("\0"), name: title )
-    # end
+    headers = csv.shift
+    csv.each do |line|
+      link = line[headers.index('Page')]
+      content = line[headers.index('Content')]
+      title = line[headers.index('Title')]
+      Article.create(link:, content: content.delete("\0"), name: title )
+    end
 
     csv = CSV.read('public/images.csv')
     headers = csv.shift
