@@ -32,7 +32,7 @@ class LlmJob < ApplicationJob
 Ссылка: #{article&.link}
 Текст: #{chunk.search_index}
       TEXT
-    end.join("------------------------------\n")
+    end.join("\n\n\n-------------------------------------------------------------------------------------------------------\n\n\n")
   end
 
   def build_references(chunks)
