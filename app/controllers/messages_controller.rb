@@ -15,8 +15,16 @@ class MessagesController < ApplicationController
 
   end
   def index
-    @messages = Message.where(room_id: params['room_id']).order(created_at: :desc).offset(offset).limit(limit)
+    @messages = Message.where(room_id: params['room_id'])
+
+    if params[:search].present?
+      search_term = "%#{params[:search]}%"
+      @messages = @messages.where('text LIKE ?', search_term)
+    end
+
+    @messages = @messages.order(created_at: :desc).offset(offset).limit(limit)
   end
+
 
   private
   def text
