@@ -1,5 +1,6 @@
 class RoomRelayJob < ApplicationJob
   queue_as :default
+  queue_with_priority 0
 
   def perform(room)
     payload = {kind: "new_room", object: render_room(room)}

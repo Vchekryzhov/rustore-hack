@@ -7,7 +7,7 @@ RailsAdmin.config do |config|
   config.actions do
     dashboard                     # mandatory
     index do
-      only %w[AnswerQuestion Message Room User Article Image VersionGroup Config]
+      only %w[AnswerQuestion Message Room User Article Image VersionGroup Config Chunk]
     end
     new
     export
