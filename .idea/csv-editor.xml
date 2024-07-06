@@ -10,6 +10,20 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="/public/articles.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="/public/images.csv">
+          <value>
+            <Attribute>
+              <option name="separator" value=":" />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="/public/page_result.csv">
           <value>
             <Attribute>

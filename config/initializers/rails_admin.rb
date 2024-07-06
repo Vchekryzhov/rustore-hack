@@ -40,6 +40,7 @@ RailsAdmin.config do |config|
     config.model 'Article' do
       edit do
         field :name
+        field :link
         field :content
         field :version
         field :version_group
