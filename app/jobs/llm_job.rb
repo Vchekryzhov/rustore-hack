@@ -1,7 +1,7 @@
 class LlmJob < ApplicationJob
   queue_with_priority 2
   def perform(message)
-    chunks = SemanticSearch.new.perform(message.text, :chunks)
+    chunks = SemanticSearch.new.perform(message.text, :chunks)[0..1]
     context = build_context(chunks)
 
     message.update(context: context )
@@ -38,7 +38,7 @@ class LlmJob < ApplicationJob
   def build_references(chunks)
     Article.where(id: chunks.map(&:article_id).uniq[0..5]).map do |article|
       <<-TEXT.strip_heredoc
-        1. [#{article.name}](#{article.link})
+        [#{article.name}](#{article.link})
       TEXT
     end
   end
