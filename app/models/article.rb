@@ -1,5 +1,5 @@
 class Article < ApplicationRecord
-  #include EmbeddingExtractor
+  include EmbeddingExtractor
   belongs_to :version_group, class_name: 'VersionGroup', optional: true
   has_many :images
   def content_for_similarity
