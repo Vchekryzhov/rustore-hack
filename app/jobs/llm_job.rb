@@ -1,7 +1,7 @@
 class LlmJob < ApplicationJob
   queue_with_priority 2
   def perform(message)
-    chunks = SemanticSearch.new.perform(message.text, :chunks)[0..1]
+    chunks = SemanticSearch.new.perform(message.text, :chunks)[0..3]
     context = build_context(chunks)
 
     message.update(context: context )

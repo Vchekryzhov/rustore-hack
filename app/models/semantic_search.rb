@@ -45,9 +45,9 @@ class SemanticSearch
           COALESCE(articles_semantic_search.id, articles_keyword_search.id, images_semantic_search.article_id, images_keyword_search.article_id ) AS id,
           COALESCE(images_semantic_search.id, images_keyword_search.id ) AS images_id,
           COALESCE(1.0 / (:article_weight + articles_semantic_search.rank), 0.0) as articles_semantic_rank,
-          COALESCE(1.0 / (:article_weight + articles_keyword_search.rank), 0.0) as articles_keyword_rank,
+          COALESCE(1.0 / (:article_weight + articles_keyword_search.rank + 3), 0.0) as articles_keyword_rank,
           COALESCE(1.0 / (:image_weight + images_semantic_search.rank), 0.0) as images_semantic_rank,
-          COALESCE(1.0 / (:image_weight + images_keyword_search.rank), 0.0) as images_keyword_rank
+          COALESCE(1.0 / (:image_weight + images_keyword_search.rank + 3), 0.0) as images_keyword_rank
       FROM articles_semantic_search
       FULL OUTER JOIN articles_keyword_search ON articles_semantic_search.id = articles_keyword_search.id
       FULL OUTER JOIN images_semantic_search ON articles_semantic_search.id = images_semantic_search.article_id
