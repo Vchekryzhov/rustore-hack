@@ -1,41 +1,54 @@
 class LlmJob < ApplicationJob
 
   def perform(message)
-    articles = SemanticSearch.new.perform(message.text)
-    context = build_context(articles)
+    chunks = SemanticSearch.new.perform(message.text, :chunks)
+    context = build_context(chunks)
 
-    message.update(context: context[0..10000] )
+    message.update(context: context )
     config = Config.first_or_create
     system_prompt = config.system
     user_prompt = config.user % { context:, query: message.text }
+
     text = if config.llm_enabled
              llm_response = Llm.call(system_prompt: , user_prompt: )
              if llm_response[:success]
                       llm_response[:message]
                     else
-                      build_fallback_response(articles)
+                      build_fallback_response(chunks)
                     end
            else
-             build_fallback_response(articles)
+             build_fallback_response(chunks)
            end
 
 
-    Message.create(text: , room_id: message.room_id, user: User.find_or_create_by(name: "admin"))
+    Message.create(text: , room_id: message.room_id, user: User.find_or_create_by(name: "admin"), references: build_references(chunks))
   end
-  def build_context(articles)
-    articles.map do |article|
+  def build_context(chunks)
+
+    chunks.map do |chunk|
+      article = chunk.article
       <<-TEXT.strip_heredoc
-Заголовок: #{article.name}
-Ссылка: #{article.link}
-Текст: #{article.search_index}
+Заголовок: #{article&.name}
+Ссылка: #{article&.link}
+Текст: #{article&.search_index}
       TEXT
     end.join("------------------------------\n")
   end
-  def build_fallback_response(articles)
-    articles[0..5].map do |article|
+
+  def build_references(chunks)
+    Article.where(id: chunks.map(&:article_id).uniq[0..5]).map do |article|
+      <<-TEXT.strip_heredoc
+        1. [#{article.name}](#{article.link})
+      TEXT
+    end.join("\n\n")
+  end
+  def build_fallback_response(chunks)
+    chunks[0..5].map do |chunk|
+      article = chunk.article
+      next if article.nil?
       <<-TEXT.strip_heredoc
         1. [#{article.summary}](#{article.link})
       TEXT
-    end.join("\n\n")
+    end.compact.join("\n\n")
   end
 end

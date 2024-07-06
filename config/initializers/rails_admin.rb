@@ -63,6 +63,7 @@ RailsAdmin.config do |config|
         field :room
         field :text
         field :context
+        field :references
       end
       list do
           field :user

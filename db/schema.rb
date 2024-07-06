@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_07_06_140234) do
+ActiveRecord::Schema[7.1].define(version: 2024_07_06_165344) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "vector"
@@ -66,6 +66,16 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_140234) do
     t.datetime "updated_at", null: false
     t.text "summary"
     t.index ["version_group_id"], name: "index_articles_on_version_group_id"
+  end
+
+  create_table "chunks", force: :cascade do |t|
+    t.bigint "article_id"
+    t.text "content"
+    t.vector "embedding", limit: 1024
+    t.string "search_index"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["article_id"], name: "index_chunks_on_article_id"
   end
 
   create_table "configs", force: :cascade do |t|
@@ -176,6 +186,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_07_06_140234) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "context"
+    t.string "references", array: true
     t.index ["room_id"], name: "index_messages_on_room_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
