@@ -1,5 +1,5 @@
 class RoomRelayJob < ApplicationJob
-  queue_as :default
+  queue_as :relays
   queue_with_priority 5
 
   def perform(room)

@@ -1,6 +1,6 @@
 class MessageRelayJob < ApplicationJob
   queue_with_priority 5
-  queue_as :default
+  queue_as :relays
 
   def perform(message)
     payload =  {kind: "new_message", object: render_message(message)}
