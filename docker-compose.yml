@@ -11,6 +11,7 @@ x-rails-common-settings: &rails-common-settings
     REDIS_URL: redis://redis:6379/1
     MALLOC_ARENA_MAX: 2
     WEB_CONCURRENCY: 0
+    GOOD_JOB_QUEUES: "llm_processing:1;relays:2;embeder:2;parsers:1"
   depends_on:
     - postgres
     - encoder
@@ -35,7 +36,7 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: rustore
     volumes:
-      - pg_data:/var/lib/postgresql/data
+      - pg_data3:/var/lib/postgresql/data
     ports:
       - "5436:5432"
   encoder:
@@ -51,7 +52,7 @@ services:
     volumes:
       - redis_data:/var/lib/redis/data
 volumes:
-  pg_data:
+  pg_data3:
   models:
   redis_data:
   storage:

@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   resources :submits, only: %w[show]
   resources :rooms, only: %w[index show destroy]
   resources :messages, only: %w[index create]
+  resources :chunks, only: %w[index new create]
+  resources :articles, only: %w[index new create]
 end

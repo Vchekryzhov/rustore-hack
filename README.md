@@ -1,20 +1,20 @@
-# Второй пилот GeekBrains
+# Rustore Помощник 
 
 ## Запуск
 ```bash
-docker-compose down && docker-compose up
+docker-compose down && docker-compose up --build
 ```
-## Основные пути
-- [Админка](https://copilot-api.kovalev.team/admin)
-- [Классификация вопросов](https://copilot-api.kovalev.team/answer_questions)
-- [Загрузка корпуса вопросов](https://copilot-api.kovalev.team/answer_questions/new)
-- [Сабмит](https://copilot-api.kovalev.team/answer_questions/upload_batch_search)
-## Определение категории
 
-1. для определения категории мы сгенерировали [корпус](public/answer_question_corpus.csv) из 7000 вопросов и ответов на основе существуюих данных. 
-2. взяли эмединги от ответов моделью [Labse](https://huggingface.co/cointegrated/LaBSE-en-ru).
-3. Далее на основе вопроса пользователя мы выполняем [гибридный поиск](app/models/semantic_search.rb) и таким образом определяем класс вопроса пользователя
+## Подготовка Данных
+1. запустите приложение командой выше и откройте [localhost:3035/articles/new]()
+2. Загрузите в форму файл с статьями который лежит в репо  public/articles.csv
+2. Откройте админку и можете видеть что создаются статьи http://localhost:3035/admin/article
+3. Проверте что работает базовый RAG http://localhost:3035/articles
+
+## Основные пути
+- [Админка](https://rustore-api.kovalev.team/admin)
+- [Поиск по корпусу статей](https://rustore-api.kovalev.team/articles)
+- [Загрузка статей](https://rustore-api.kovalev.team/articles/new)
 
 ## чатбот
 
-[123](https://kek.com)

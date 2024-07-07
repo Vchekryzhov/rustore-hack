@@ -8,11 +8,11 @@ default: &default
   port: 5436
 development:
   <<: *default
-  database: copilot
+  database: rustore
 
 test:
   <<: *default
-  database: museums_test
+  database: rustore
 
 production:
   adapter: <%= ENV['DB_ADAPTER'] ||= 'postgresql' %>
