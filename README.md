@@ -1,17 +1,20 @@
 # Rustore Помощник 
 
-## Запуск
+### архитектура решения
+![img.png](public/img.png)
+
+### Запуск
 ```bash
 docker-compose down && docker-compose up --build
 ```
 
-## Подготовка Данных
+### Подготовка Данных
 1. запустите приложение командой выше и откройте [localhost:3035/articles/new]()
 2. Загрузите в форму файл с статьями который лежит в репо  public/articles.csv
 2. Откройте админку и можете видеть что создаются статьи http://localhost:3035/admin/article
 3. Проверте что работает базовый RAG http://localhost:3035/articles
 
-## Прозрачность данных
+### Прозрачность данных
 В файле app/jobs/llm_job.rb находится job который подготваливает ответ для пользователя.
 
 В файле models/llm происходит запрос на LLM
@@ -20,11 +23,17 @@ docker-compose down && docker-compose up --build
 
 На странице https://rustore-api.kovalev.team/admin/message можно видеть список всех сообщенией 
 в системе и если зайти в какое нибудь сообщение можно увидеть контекст который был отправлен в LLM и референсы на статьи из которых взят контекст
-## Основные пути
+### Основные пути
 - [Чатбот](https://rustore.kovalev.team) можно зайти под гостем или под админом `manager:zak2`
 - [Админка](https://rustore-api.kovalev.team/admin)
 - [Поиск по корпусу статей](https://rustore-api.kovalev.team/articles)
 - [Загрузка статей](https://rustore-api.kovalev.team/articles/new)
+
+
+### Схема работы пользовательского инференса
+![](/home/viktor/univer/rustore/public/schema1.png)
+
+
 
 ------
 ## LLM
@@ -40,6 +49,10 @@ docker-compose down && docker-compose up --build
 
 Можно в целом поменять модель с Phi-3 и все заведется
 
+-----
+## Encoder
+в папке encoder лежит енкодер который используется для извлечения эмбедингов из текста.
+Используется модель BGE-M3 лицензия MIT
 -----
 ## Парсинг документации
 
@@ -81,3 +94,6 @@ pip install -r requirements.txt
 Запуск скриптов в порядке из описания.
 -------
 
+## Фронт
+
+Фронт находится в папке front в корне репозитория
